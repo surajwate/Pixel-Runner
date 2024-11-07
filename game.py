@@ -9,7 +9,7 @@ test_font = pygame.font.Font("font/Pixeltype.ttf", 50)
 
 sky_surface = pygame.image.load("graphics/Sky.png")
 ground_surface = pygame.image.load("graphics/ground.png")
-text_surface = test_font.render("My Game", False, 'green')
+text_surface = test_font.render("My Game", False, 'black')
 
 while True:
     for event in pygame.event.get():
