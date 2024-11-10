@@ -30,7 +30,8 @@ while True:
         #         print("Collision")
 
         if event.type == pygame.KEYDOWN:
-            print("Key Down")
+            if event.key == pygame.K_SPACE:
+                print("Jump")
 
         if event.type == pygame.KEYUP:
             print("Key Up")
