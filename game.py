@@ -29,6 +29,12 @@ while True:
         #     if player_reactange.collidepoint(event.pos):
         #         print("Collision")
 
+        if event.type == pygame.KEYDOWN:
+            print("Key Down")
+
+        if event.type == pygame.KEYUP:
+            print("Key Up")
+
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
     pygame.draw.rect(screen, "#c0e8ec", score_rect)
@@ -41,9 +47,9 @@ while True:
     screen.blit(snail_surface, snail_rectangle)
     screen.blit(player_surface, player_reactange)
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_SPACE]:
-        print("Jump")
+    # keys = pygame.key.get_pressed()
+    # if keys[pygame.K_SPACE]:
+    #     print("Jump")
 
     # if player_reactange.colliderect(snail_rectangle):
     #     print("Collision")
