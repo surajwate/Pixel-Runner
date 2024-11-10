@@ -31,6 +31,8 @@ while True:
 
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
+    pygame.draw.rect(screen, "pink", score_rect)
+    pygame.draw.rect(screen, "pink", score_rect, 10)
     screen.blit(score_surface, score_rect)
 
     if snail_rectangle.right <= 0:
