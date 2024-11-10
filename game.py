@@ -41,6 +41,10 @@ while True:
     screen.blit(snail_surface, snail_rectangle)
     screen.blit(player_surface, player_reactange)
 
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_SPACE]:
+        print("Jump")
+
     # if player_reactange.colliderect(snail_rectangle):
     #     print("Collision")
 
