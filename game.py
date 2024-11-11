@@ -49,16 +49,5 @@ while True:
     player_reactange.bottom += player_gravity
     screen.blit(player_surface, player_reactange)
 
-    # keys = pygame.key.get_pressed()
-    # if keys[pygame.K_SPACE]:
-    #     print("Jump")
-
-    # if player_reactange.colliderect(snail_rectangle):
-    #     print("Collision")
-
-    # mouse_position = pygame.mouse.get_pos()
-    # if player_reactange.collidepoint((mouse_position)):
-    #     print(pygame.mouse.get_pressed())
-
     pygame.display.update()
     clock.tick(60)
