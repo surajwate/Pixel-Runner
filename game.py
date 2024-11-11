@@ -51,5 +51,11 @@ while True:
         player_reactange.bottom = 300
     screen.blit(player_surface, player_reactange)
 
+    # Collision
+    if player_reactange.colliderect(snail_rectangle):
+        pygame.time.delay(1000)
+        pygame.quit()
+        exit()
+
     pygame.display.update()
     clock.tick(60)
