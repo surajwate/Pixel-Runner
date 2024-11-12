@@ -13,8 +13,15 @@ screen = pygame.display.set_mode((800, 400))
 pygame.display.set_caption("Runner Game")
 clock = pygame.time.Clock()
 test_font = pygame.font.Font("font/Pixeltype.ttf", 50)
-game_active = True
+game_active = False
 start_time = 0
+
+# Surfaces
+game_title = test_font.render("Running Man", False, (64, 64, 64))
+game_title_rect = game_title.get_rect(center=(400, 50))
+
+instructions_surface = test_font.render("Press Space to Run", False, (111, 196, 169))
+instructions_rect = instructions_surface.get_rect(center=(400, 320))
 
 sky_surface = pygame.image.load("graphics/Sky.png").convert()
 ground_surface = pygame.image.load("graphics/ground.png").convert()
@@ -28,6 +35,11 @@ snail_rectangle = snail_surface.get_rect(midbottom=(600, 300))
 player_surface = pygame.image.load("graphics/Player/player_walk_1.png").convert_alpha()
 player_reactange = player_surface.get_rect(midbottom=(80, 300))
 player_gravity = 0
+
+# Introduction Screen
+player_stand = pygame.image.load("graphics/Player/player_stand.png").convert_alpha()
+player_stand = pygame.transform.rotozoom(player_stand, 0, 2)
+player_stand_rectangle = player_stand.get_rect(center=(400, 200))
 
 while True:
     for event in pygame.event.get():
@@ -74,7 +86,10 @@ while True:
         if player_reactange.colliderect(snail_rectangle):
             game_active = False
     else:
-        screen.fill("#ffcc00")
+        screen.fill((94, 129, 162))
+        screen.blit(player_stand, player_stand_rectangle)
+        screen.blit(game_title, game_title_rect)
+        screen.blit(instructions_surface, instructions_rect)
 
     pygame.display.update()
     clock.tick(60)
