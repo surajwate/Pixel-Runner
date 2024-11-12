@@ -1,12 +1,14 @@
 import pygame
 from sys import exit
 
+
 def display_score():
-    current_time = int((pygame.time.get_ticks() - start_time)/1000)
+    current_time = int((pygame.time.get_ticks() - start_time) / 1000)
     score_surface = test_font.render(f"Score: {current_time}", False, (64, 64, 64))
     score_rect = score_surface.get_rect(center=(400, 50))
     screen.blit(score_surface, score_rect)
     return current_time
+
 
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
@@ -93,7 +95,7 @@ while True:
         score_message = test_font.render(f"Your Score: {score}", False, (111, 196, 169))
         score_message_rect = score_message.get_rect(center=(400, 340))
         screen.blit(game_title, game_title_rect)
-        
+
         if score == 0:
             screen.blit(instructions_surface, instructions_rect)
         else:
