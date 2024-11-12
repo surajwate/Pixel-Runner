@@ -6,6 +6,7 @@ def display_score():
     score_surface = test_font.render(f"Score: {current_time}", False, (64, 64, 64))
     score_rect = score_surface.get_rect(center=(400, 50))
     screen.blit(score_surface, score_rect)
+    return current_time
 
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
@@ -14,6 +15,7 @@ clock = pygame.time.Clock()
 test_font = pygame.font.Font("font/Pixeltype.ttf", 50)
 game_active = False
 start_time = 0
+score = 0
 
 # Surfaces
 game_title = test_font.render("Running Man", False, (111, 196, 169))
@@ -68,7 +70,7 @@ while True:
         # pygame.draw.rect(screen, "#c0e8ec", score_rect)
         # pygame.draw.rect(screen, "#c0e8ec", score_rect, 10)
         # screen.blit(score_surface, score_rect)
-        display_score()
+        score = display_score()
 
         if snail_rectangle.right <= 0:
             snail_rectangle.left = 800
@@ -87,8 +89,15 @@ while True:
     else:
         screen.fill((94, 129, 162))
         screen.blit(player_stand, player_stand_rectangle)
+
+        score_message = test_font.render(f"Your Score: {score}", False, (111, 196, 169))
+        score_message_rect = score_message.get_rect(center=(400, 340))
         screen.blit(game_title, game_title_rect)
-        screen.blit(instructions_surface, instructions_rect)
+        
+        if score == 0:
+            screen.blit(instructions_surface, instructions_rect)
+        else:
+            screen.blit(score_message, score_message_rect)
 
     pygame.display.update()
     clock.tick(60)
