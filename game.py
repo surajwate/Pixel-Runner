@@ -2,9 +2,8 @@ import pygame
 from sys import exit
 
 def display_score():
-    current_time = pygame.time.get_ticks() - start_time
-    current_time /= 1000
-    score_surface = test_font.render(f"Score: {int(current_time)}", False, (64, 64, 64))
+    current_time = int((pygame.time.get_ticks() - start_time)/1000)
+    score_surface = test_font.render(f"Score: {current_time}", False, (64, 64, 64))
     score_rect = score_surface.get_rect(center=(400, 50))
     screen.blit(score_surface, score_rect)
 
@@ -17,11 +16,11 @@ game_active = False
 start_time = 0
 
 # Surfaces
-game_title = test_font.render("Running Man", False, (64, 64, 64))
+game_title = test_font.render("Running Man", False, (111, 196, 169))
 game_title_rect = game_title.get_rect(center=(400, 50))
 
 instructions_surface = test_font.render("Press Space to Run", False, (111, 196, 169))
-instructions_rect = instructions_surface.get_rect(center=(400, 320))
+instructions_rect = instructions_surface.get_rect(center=(400, 340))
 
 sky_surface = pygame.image.load("graphics/Sky.png").convert()
 ground_surface = pygame.image.load("graphics/ground.png").convert()
