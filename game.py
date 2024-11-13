@@ -44,6 +44,10 @@ player_stand = pygame.image.load("graphics/Player/player_stand.png").convert_alp
 player_stand = pygame.transform.rotozoom(player_stand, 0, 2)
 player_stand_rectangle = player_stand.get_rect(center=(400, 200))
 
+# Timer
+obstacle_timer = pygame.USEREVENT + 1
+pygame.time.set_timer(obstacle_timer, 900)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -65,6 +69,9 @@ while True:
                 game_active = True
                 snail_rectangle.left = 800
                 start_time = pygame.time.get_ticks()
+
+        if event.type == obstacle_timer and game_active:
+            print("Obstacle Timer")
 
     if game_active:
         screen.blit(sky_surface, (0, 0))
