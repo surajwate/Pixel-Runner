@@ -1,6 +1,6 @@
 import pygame
 from sys import exit
-
+from random import randint
 
 def display_score():
     current_time = int((pygame.time.get_ticks() - start_time) / 1000)
@@ -9,6 +9,16 @@ def display_score():
     screen.blit(score_surface, score_rect)
     return current_time
 
+def obstacle_movement(obstacle_list):
+    if obstacle_list:
+        for obstacle_rect in obstacle_list:
+            obstacle_rect.x -= 5
+            if obstacle_rect.right <= 0:
+                obstacle_list.remove(obstacle_rect)
+            screen.blit(snail_surface, obstacle_rect)
+        return obstacle_list
+    else:
+        return []
 
 pygame.init()
 screen = pygame.display.set_mode((800, 400))
@@ -29,11 +39,11 @@ instructions_rect = instructions_surface.get_rect(center=(400, 340))
 sky_surface = pygame.image.load("graphics/Sky.png").convert()
 ground_surface = pygame.image.load("graphics/ground.png").convert()
 
-# score_surface = test_font.render("My Game", False, (64, 64, 64))
-# score_rect = score_surface.get_rect(center=(400, 50))
-
+# Obstacles
 snail_surface = pygame.image.load("graphics/snail/snail1.png").convert_alpha()
 snail_rectangle = snail_surface.get_rect(midbottom=(600, 300))
+
+obstacle_rect_list = []
 
 player_surface = pygame.image.load("graphics/Player/player_walk_1.png").convert_alpha()
 player_reactange = player_surface.get_rect(midbottom=(80, 300))
@@ -46,7 +56,7 @@ player_stand_rectangle = player_stand.get_rect(center=(400, 200))
 
 # Timer
 obstacle_timer = pygame.USEREVENT + 1
-pygame.time.set_timer(obstacle_timer, 900)
+pygame.time.set_timer(obstacle_timer, 1500)
 
 while True:
     for event in pygame.event.get():
@@ -71,7 +81,7 @@ while True:
                 start_time = pygame.time.get_ticks()
 
         if event.type == obstacle_timer and game_active:
-            print("Obstacle Timer")
+            obstacle_rect_list.append(snail_surface.get_rect(bottomright=(randint(900, 1100), 300)))
 
     if game_active:
         screen.blit(sky_surface, (0, 0))
@@ -81,16 +91,15 @@ while True:
         # screen.blit(score_surface, score_rect)
         score = display_score()
 
-        if snail_rectangle.right <= 0:
-            snail_rectangle.left = 800
-        snail_rectangle.left -= 4
-        screen.blit(snail_surface, snail_rectangle)
-
+        # Player
         player_gravity += 1
         player_reactange.bottom += player_gravity
         if player_reactange.bottom >= 300:
             player_reactange.bottom = 300
         screen.blit(player_surface, player_reactange)
+
+        # Obstacles
+        obstacle_rect_list = obstacle_movement(obstacle_rect_list)
 
         # Collision
         if player_reactange.colliderect(snail_rectangle):
