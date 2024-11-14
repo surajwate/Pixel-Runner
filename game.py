@@ -124,6 +124,9 @@ while True:
     else:
         screen.fill((94, 129, 162))
         screen.blit(player_stand, player_stand_rectangle)
+        obstacle_rect_list.clear()
+        player_reactange.midbottom = (80, 300)
+        player_gravity = 0
 
         score_message = test_font.render(f"Your Score: {score}", False, (111, 196, 169))
         score_message_rect = score_message.get_rect(center=(400, 340))
